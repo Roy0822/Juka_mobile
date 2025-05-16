@@ -1,0 +1,627 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ABCDC95D2DBA424500FF738D /* SplineRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = ABCDC95C2DBA424500FF738D /* SplineRuntime */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ABB4D8492DBA090B00B01114 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABB4D8302DBA090500B01114 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABB4D8372DBA090500B01114;
+			remoteInfo = juka_new;
+		};
+		ABB4D8532DBA090B00B01114 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABB4D8302DBA090500B01114 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABB4D8372DBA090500B01114;
+			remoteInfo = juka_new;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AB84600B2DBC8722002876E3 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AB845FF22DBC871E002876E3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		AB845FF42DBC871E002876E3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		ABB4D8382DBA090500B01114 /* juka_new.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = juka_new.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABB4D8482DBA090B00B01114 /* juka_newTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = juka_newTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABB4D8522DBA090B00B01114 /* juka_newUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = juka_newUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		ABB4D83A2DBA090500B01114 /* juka_new */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = juka_new;
+			sourceTree = "<group>";
+		};
+		ABB4D84B2DBA090B00B01114 /* juka_newTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = juka_newTests;
+			sourceTree = "<group>";
+		};
+		ABB4D8552DBA090B00B01114 /* juka_newUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = juka_newUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ABB4D8352DBA090500B01114 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABCDC95D2DBA424500FF738D /* SplineRuntime in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABB4D8452DBA090B00B01114 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABB4D84F2DBA090B00B01114 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AB845FF12DBC871E002876E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB845FF22DBC871E002876E3 /* WidgetKit.framework */,
+				AB845FF42DBC871E002876E3 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ABB4D82F2DBA090500B01114 = {
+			isa = PBXGroup;
+			children = (
+				ABB4D83A2DBA090500B01114 /* juka_new */,
+				ABB4D84B2DBA090B00B01114 /* juka_newTests */,
+				ABB4D8552DBA090B00B01114 /* juka_newUITests */,
+				AB845FF12DBC871E002876E3 /* Frameworks */,
+				ABB4D8392DBA090500B01114 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ABB4D8392DBA090500B01114 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABB4D8382DBA090500B01114 /* juka_new.app */,
+				ABB4D8482DBA090B00B01114 /* juka_newTests.xctest */,
+				ABB4D8522DBA090B00B01114 /* juka_newUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ABB4D8372DBA090500B01114 /* juka_new */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABB4D85C2DBA090B00B01114 /* Build configuration list for PBXNativeTarget "juka_new" */;
+			buildPhases = (
+				ABB4D8342DBA090500B01114 /* Sources */,
+				ABB4D8352DBA090500B01114 /* Frameworks */,
+				ABB4D8362DBA090500B01114 /* Resources */,
+				AB84600B2DBC8722002876E3 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				ABB4D83A2DBA090500B01114 /* juka_new */,
+			);
+			name = juka_new;
+			packageProductDependencies = (
+				ABCDC95C2DBA424500FF738D /* SplineRuntime */,
+			);
+			productName = juka_new;
+			productReference = ABB4D8382DBA090500B01114 /* juka_new.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ABB4D8472DBA090B00B01114 /* juka_newTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABB4D85F2DBA090B00B01114 /* Build configuration list for PBXNativeTarget "juka_newTests" */;
+			buildPhases = (
+				ABB4D8442DBA090B00B01114 /* Sources */,
+				ABB4D8452DBA090B00B01114 /* Frameworks */,
+				ABB4D8462DBA090B00B01114 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABB4D84A2DBA090B00B01114 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				ABB4D84B2DBA090B00B01114 /* juka_newTests */,
+			);
+			name = juka_newTests;
+			packageProductDependencies = (
+			);
+			productName = juka_newTests;
+			productReference = ABB4D8482DBA090B00B01114 /* juka_newTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		ABB4D8512DBA090B00B01114 /* juka_newUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABB4D8622DBA090B00B01114 /* Build configuration list for PBXNativeTarget "juka_newUITests" */;
+			buildPhases = (
+				ABB4D84E2DBA090B00B01114 /* Sources */,
+				ABB4D84F2DBA090B00B01114 /* Frameworks */,
+				ABB4D8502DBA090B00B01114 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABB4D8542DBA090B00B01114 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				ABB4D8552DBA090B00B01114 /* juka_newUITests */,
+			);
+			name = juka_newUITests;
+			packageProductDependencies = (
+			);
+			productName = juka_newUITests;
+			productReference = ABB4D8522DBA090B00B01114 /* juka_newUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ABB4D8302DBA090500B01114 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					ABB4D8372DBA090500B01114 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					ABB4D8472DBA090B00B01114 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = ABB4D8372DBA090500B01114;
+					};
+					ABB4D8512DBA090B00B01114 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = ABB4D8372DBA090500B01114;
+					};
+				};
+			};
+			buildConfigurationList = ABB4D8332DBA090500B01114 /* Build configuration list for PBXProject "juka_new" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ABB4D82F2DBA090500B01114;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ABCDC95B2DBA422600FF738D /* XCRemoteSwiftPackageReference "spline-ios" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = ABB4D8392DBA090500B01114 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABB4D8372DBA090500B01114 /* juka_new */,
+				ABB4D8472DBA090B00B01114 /* juka_newTests */,
+				ABB4D8512DBA090B00B01114 /* juka_newUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ABB4D8362DBA090500B01114 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABB4D8462DBA090B00B01114 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABB4D8502DBA090B00B01114 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABB4D8342DBA090500B01114 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABB4D8442DBA090B00B01114 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABB4D84E2DBA090B00B01114 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ABB4D84A2DBA090B00B01114 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABB4D8372DBA090500B01114 /* juka_new */;
+			targetProxy = ABB4D8492DBA090B00B01114 /* PBXContainerItemProxy */;
+		};
+		ABB4D8542DBA090B00B01114 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABB4D8372DBA090500B01114 /* juka_new */;
+			targetProxy = ABB4D8532DBA090B00B01114 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		ABB4D85A2DBA090B00B01114 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ABB4D85B2DBA090B00B01114 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ABB4D85D2DBA090B00B01114 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"juka_new/Preview Content\"";
+				DEVELOPMENT_TEAM = 47D56D7UPJ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "juka-new-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要您的位置以在地圖上顯示位置";
+				INFOPLIST_KEY_NSLocationUsageDescription = "需要您的位置以在地圖上顯示位置";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要您的位置以在地圖上顯示位置";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "slasho.juka-new";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ABB4D85E2DBA090B00B01114 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"juka_new/Preview Content\"";
+				DEVELOPMENT_TEAM = 47D56D7UPJ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "juka-new-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要您的位置以在地圖上顯示位置";
+				INFOPLIST_KEY_NSLocationUsageDescription = "需要您的位置以在地圖上顯示位置";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要您的位置以在地圖上顯示位置";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "slasho.juka-new";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		ABB4D8602DBA090B00B01114 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "slasho.juka-newTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/juka_new.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/juka_new";
+			};
+			name = Debug;
+		};
+		ABB4D8612DBA090B00B01114 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "slasho.juka-newTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/juka_new.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/juka_new";
+			};
+			name = Release;
+		};
+		ABB4D8632DBA090B00B01114 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "slasho.juka-newUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = juka_new;
+			};
+			name = Debug;
+		};
+		ABB4D8642DBA090B00B01114 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "slasho.juka-newUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = juka_new;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ABB4D8332DBA090500B01114 /* Build configuration list for PBXProject "juka_new" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABB4D85A2DBA090B00B01114 /* Debug */,
+				ABB4D85B2DBA090B00B01114 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABB4D85C2DBA090B00B01114 /* Build configuration list for PBXNativeTarget "juka_new" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABB4D85D2DBA090B00B01114 /* Debug */,
+				ABB4D85E2DBA090B00B01114 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABB4D85F2DBA090B00B01114 /* Build configuration list for PBXNativeTarget "juka_newTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABB4D8602DBA090B00B01114 /* Debug */,
+				ABB4D8612DBA090B00B01114 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABB4D8622DBA090B00B01114 /* Build configuration list for PBXNativeTarget "juka_newUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABB4D8632DBA090B00B01114 /* Debug */,
+				ABB4D8642DBA090B00B01114 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ABCDC95B2DBA422600FF738D /* XCRemoteSwiftPackageReference "spline-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/splinetool/spline-ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ABCDC95C2DBA424500FF738D /* SplineRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABCDC95B2DBA422600FF738D /* XCRemoteSwiftPackageReference "spline-ios" */;
+			productName = SplineRuntime;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = ABB4D8302DBA090500B01114 /* Project object */;
+}

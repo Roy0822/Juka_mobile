@@ -1,0 +1,206 @@
+[
+    {
+        "id": "001",
+        "title": "星巴克買一送一",
+        "activityDescription": "限時優惠！大杯拿鐵買一送一",
+        "createdAt": "2025-04-25T10:00:00Z",
+        "expiresAt": "2025-04-25T13:00:00Z",
+        "location": {
+            "latitude": 25.0427731,
+            "longitude": 121.5140326,
+            "placeName": "星巴克台大店"
+        },
+        "creatorId": "user1",
+        "creatorName": "吳盛偉",
+        "participantIds": [],
+        "type": "coffeeDeal",
+        "isActive": true
+    },
+    {
+        "id": "002",
+        "title": "麥當勞早餐優惠",
+        "activityDescription": "買任一套餐送蘋果派",
+        "createdAt": "2025-04-25T09:00:00Z",
+        "expiresAt": "2025-04-25T11:00:00Z",
+        "location": {
+            "latitude": 25.0425629,
+            "longitude": 121.5153408,
+            "placeName": "麥當勞公館店"
+        },
+        "creatorId": "user2",
+        "creatorName": "林小芳",
+        "participantIds": [],
+        "type": "foodDeal",
+        "isActive": true
+    },
+    {
+        "id": "003",
+        "title": "共乘到台北車站",
+        "activityDescription": "計程車共乘，平分車資",
+        "createdAt": "2025-04-25T08:30:00Z",
+        "expiresAt": "2025-04-25T10:30:00Z",
+        "location": {
+            "latitude": 25.0421045,
+            "longitude": 121.5133259,
+            "placeName": "台大公館捷運站"
+        },
+        "creatorId": "user3",
+        "creatorName": "張大明",
+        "participantIds": [],
+        "type": "rideShare",
+        "isActive": true
+    },
+    {
+        "id": "004",
+        "title": "公館夜市美食團",
+        "activityDescription": "一起去公館夜市嚐美食，揪四人同行有折扣",
+        "createdAt": "2025-04-25T11:00:00Z",
+        "expiresAt": "2025-04-25T19:00:00Z",
+        "location": {
+            "latitude": 25.0411388,
+            "longitude": 121.5138551,
+            "placeName": "公館夜市"
+        },
+        "creatorId": "user4",
+        "creatorName": "陳美玲",
+        "participantIds": [],
+        "type": "foodDeal",
+        "isActive": true
+    },
+    {
+        "id": "005",
+        "title": "全家便利商店霜淇淋特價",
+        "activityDescription": "霜淇淋第二支半價，一起揪團吃冰！",
+        "createdAt": "2025-04-25T12:00:00Z",
+        "expiresAt": "2025-04-25T23:59:00Z",
+        "location": {
+            "latitude": 25.0436054,
+            "longitude": 121.5136679,
+            "placeName": "全家公館店"
+        },
+        "creatorId": "user5",
+        "creatorName": "王小明",
+        "participantIds": [],
+        "type": "foodDeal",
+        "isActive": true
+    },
+    {
+        "id": "006",
+        "title": "誠品書局讀書會",
+        "activityDescription": "討論新書《斷捨離》，參加送精美書籤",
+        "createdAt": "2025-04-25T14:00:00Z",
+        "expiresAt": "2025-04-26T16:00:00Z",
+        "location": {
+            "latitude": 25.0419246,
+            "longitude": 121.5161867,
+            "placeName": "誠品公館店"
+        },
+        "creatorId": "user6",
+        "creatorName": "黃書涵",
+        "participantIds": [],
+        "type": "entertainment",
+        "isActive": true
+    },
+    {
+        "id": "007",
+        "title": "台大體育館健身夥伴",
+        "activityDescription": "找尋健身夥伴，互相督促，一起進步",
+        "createdAt": "2025-04-25T09:30:00Z",
+        "expiresAt": "2025-04-25T20:00:00Z",
+        "location": {
+            "latitude": 25.0428989,
+            "longitude": 121.5117455,
+            "placeName": "台大體育館"
+        },
+        "creatorId": "user7",
+        "creatorName": "李強健",
+        "participantIds": [],
+        "type": "entertainment",
+        "isActive": true
+    },
+    {
+        "id": "008",
+        "title": "台大圖書館讀書小組",
+        "activityDescription": "期末考前一起準備，互相解題，備考資料共享",
+        "createdAt": "2025-04-25T13:00:00Z",
+        "expiresAt": "2025-04-25T18:00:00Z",
+        "location": {
+            "latitude": 25.0418321,
+            "longitude": 121.5148732,
+            "placeName": "台大總圖書館"
+        },
+        "creatorId": "user8",
+        "creatorName": "楊學霸",
+        "participantIds": [],
+        "type": "education",
+        "isActive": true
+    },
+    {
+        "id": "009",
+        "title": "公館水源市場採購團",
+        "activityDescription": "一起去市場買菜，人多好討價還價，還能分享食譜",
+        "createdAt": "2025-04-25T07:00:00Z",
+        "expiresAt": "2025-04-25T10:00:00Z",
+        "location": {
+            "latitude": 25.0402654,
+            "longitude": 121.5126231,
+            "placeName": "水源市場"
+        },
+        "creatorId": "user9",
+        "creatorName": "劉阿姨",
+        "participantIds": [],
+        "type": "shopping",
+        "isActive": true
+    },
+    {
+        "id": "010",
+        "title": "公館二手書交換會",
+        "activityDescription": "帶上你不需要的書籍，來交換其他人的寶藏",
+        "createdAt": "2025-04-25T14:30:00Z",
+        "expiresAt": "2025-04-25T17:30:00Z",
+        "location": {
+            "latitude": 25.0429876,
+            "longitude": 121.5144298,
+            "placeName": "台大活大前廣場"
+        },
+        "creatorId": "user10",
+        "creatorName": "謝書僮",
+        "participantIds": [],
+        "type": "education",
+        "isActive": true
+    },
+    {
+        "id": "011",
+        "title": "公館寵物友好咖啡廳聚會",
+        "activityDescription": "帶上你的毛小孩，一起來「貓咪咖啡」享受下午茶時光",
+        "createdAt": "2025-04-25T15:00:00Z",
+        "expiresAt": "2025-04-25T17:00:00Z",
+        "location": {
+            "latitude": 25.0435129,
+            "longitude": 121.5142357,
+            "placeName": "貓咪咖啡廳"
+        },
+        "creatorId": "user11",
+        "creatorName": "林貓奴",
+        "participantIds": [],
+        "type": "petFriendly",
+        "isActive": true
+    },
+    {
+        "id": "012",
+        "title": "台大小福廣場街頭藝人表演",
+        "activityDescription": "免費吉他民謠表演，歡迎駐足欣賞",
+        "createdAt": "2025-04-25T16:00:00Z",
+        "expiresAt": "2025-04-25T18:00:00Z",
+        "location": {
+            "latitude": 25.0417653,
+            "longitude": 121.5338792,
+            "placeName": "台大小福廣場"
+        },
+        "creatorId": "user12",
+        "creatorName": "陳吉他手",
+        "participantIds": [],
+        "type": "entertainment",
+        "isActive": true
+    }
+] 

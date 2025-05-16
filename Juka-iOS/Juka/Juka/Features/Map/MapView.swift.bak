@@ -1,0 +1,890 @@
+import SwiftUI
+import MapKit
+
+struct MapView: View {
+    @Environment(\.colorScheme) private var colorScheme
+    @State private var cameraPosition: MapCameraPosition = .region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 25.033, longitude: 121.565),
+            span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        )
+    )
+    @State private var mapSelection: GroupActivity?
+    @State private var selectedActivity: GroupActivity?
+    @State private var drawerState: DrawerState = .halfExpanded
+    @State private var showCreateGroup = false
+    @State private var showJoinGroup = false
+    @State private var showNotification = false
+    @State private var showChatRoom = false
+    @State private var notificationActivity: GroupActivity?
+    @State private var chatActivity: GroupActivity?
+    @State private var activities: [GroupActivity] = []
+    
+    private let minDrawerHeight: CGFloat = 120
+    private let halfDrawerHeight: CGFloat = 300
+    private let maxDrawerHeight: CGFloat = 600
+    
+    var body: some View {
+        ZStack {
+            // Map
+            Map(position: $cameraPosition, selection: $mapSelection) {
+                ForEach(activities) { activity in
+                    Marker(activity.title, coordinate: activity.location.coordinate)
+                        .tint(markerColor(for: activity.type))
+                        .tag(activity)
+                }
+            }
+            .ignoresSafeArea()
+            .onChange(of: mapSelection) { _, newValue in
+                withAnimation {
+                    if newValue != nil {
+                        drawerState = .halfExpanded
+                        selectedActivity = newValue
+                    }
+                }
+            }
+            .mapStyle(colorScheme == .dark ? .standard(elevation: .realistic, emphasis: .muted) : .standard)
+            
+            // Drawer View
+            DrawerView(
+                state: $drawerState,
+                minHeight: minDrawerHeight,
+                halfHeight: halfDrawerHeight,
+                maxHeight: maxDrawerHeight
+            ) {
+                if let selectedActivity {
+                    // Activity preview in drawer
+                    ScrollView {
+                        GroupPreviewView(activity: selectedActivity) {
+                            // When user taps "Join", show the JoinGroupView
+                            self.showJoinGroup = true
+                        }
+                        .padding()
+                    }
+                } else {
+                    // List of nearby activities when no activity is selected
+                    NearbyActivitiesListView(activities: activities) { activity in
+                        mapSelection = activity
+                        selectedActivity = activity
+                        withAnimation {
+                            cameraPosition = .region(
+                                MKCoordinateRegion(
+                                    center: activity.location.coordinate,
+                                    span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+            .onChange(of: drawerState) { _, newState in
+                if newState == .fullyExpanded {
+                    withAnimation {
+                        showNotification = false
+                    }
+                }
+            }
+            
+            // Floating navigation bar at top
+            VStack {
+                HStack {
+                    Button {
+                        withAnimation {
+                            // Reset to user location
+                            cameraPosition = .region(
+                                MKCoordinateRegion(
+                                    center: CLLocationCoordinate2D(latitude: 25.033, longitude: 121.565),
+                                    span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                                )
+                            )
+                        }
+                    } label: {
+                        Image(systemName: "location.fill")
+                            .font(.headline)
+                            .padding(10)
+                            .background(AppStyles.background)
+                            .clipShape(Circle())
+                            .shadow(color: AppStyles.shadowColor, radius: 4, x: 0, y: 2)
+                    }
+                    
+                    Spacer()
+                    
+                    if selectedActivity != nil {
+                        Button {
+                            withAnimation {
+                                selectedActivity = nil
+                                mapSelection = nil
+                                drawerState = .halfExpanded
+                            }
+                        } label: {
+                            Text("返回列表")
+                                .font(AppStyles.Typography.subtitle)
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 20)
+                                .background(AppStyles.background.opacity(0.8))
+                                .clipShape(Capsule())
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 12) {
+                        ThemeToggle()
+                            .environmentObject(ThemeManager.shared)
+                        
+                        Button {
+                            showNotification.toggle()
+                        } label: {
+                            Image(systemName: "bell.fill")
+                                .font(.headline)
+                                .padding(10)
+                                .background(AppStyles.background)
+                                .clipShape(Circle())
+                                .shadow(color: AppStyles.shadowColor, radius: 4, x: 0, y: 2)
+                        }
+                    }
+                }
+                .padding()
+                
+                Spacer()
+            }
+            
+            // Floating action button
+            VStack {
+                Spacer()
+                
+                HStack {
+                    Spacer()
+                    
+                    // Only show FAB when drawer is not fully expanded
+                    if drawerState != .fullyExpanded {
+                        FloatingActionButton {
+                            showCreateGroup = true
+                        }
+                        .padding(.trailing, 20)
+                        .padding(.bottom, drawerHeight + 20)
+                        .transition(.scale.combined(with: .opacity))
+                    }
+                }
+            }
+            .animation(AppStyles.animation, value: drawerState)
+            
+            // Notification
+            if showNotification, let notificationActivity {
+                VStack {
+                    NotificationCard(
+                        activity: notificationActivity,
+                        creatorName: notificationActivity.creatorName,
+                        distance: 200,
+                        onAccept: {
+                            showNotification = false
+                            chatActivity = notificationActivity
+                            showChatRoom = true
+                        },
+                        onDecline: {
+                            showNotification = false
+                        }
+                    )
+                    .padding()
+                    
+                    Spacer()
+                }
+                .transition(.move(edge: .top).combined(with: .opacity))
+            }
+            
+            // Chat Room
+            if showChatRoom, let chatActivity {
+                ChatRoomView(
+                    activity: chatActivity,
+                    isPresented: $showChatRoom
+                )
+                .transition(.move(edge: .bottom))
+            }
+        }
+        .sheet(isPresented: $showCreateGroup) {
+            CreateGroupView()
+                .onDisappear {
+                    // Refresh data when returning from create group
+                    // In a real app, you would fetch new data from the backend
+                }
+        }
+        .sheet(isPresented: $showJoinGroup) {
+            if let selectedActivity {
+                JoinGroupView(activity: selectedActivity)
+            }
+        }
+        .onAppear {
+            loadSampleData()
+            
+            // Show a notification after a delay for demo purposes
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                if let activity = activities.first {
+                    notificationActivity = activity
+                    withAnimation {
+                        showNotification = true
+                    }
+                }
+            }
+        }
+    }
+    
+    private var drawerHeight: CGFloat {
+        switch drawerState {
+        case .collapsed:
+            return minDrawerHeight
+        case .halfExpanded:
+            return halfDrawerHeight
+        case .fullyExpanded:
+            return maxDrawerHeight
+        }
+    }
+    
+    private func markerColor(for type: GroupType) -> Color {
+        switch type {
+        case .coffeeDeal:
+            return .brown
+        case .foodDeal:
+            return .orange
+        case .rideShare:
+            return .blue
+        case .shopping:
+            return .green
+        case .other:
+            return .purple
+        }
+    }
+    
+    private func loadSampleData() {
+        // Create sample data for demo
+        let locations = [
+            Location(latitude: 25.033, longitude: 121.565, placeName: "台北 101"),
+            Location(latitude: 25.036, longitude: 121.568, placeName: "信義商圈"),
+            Location(latitude: 25.030, longitude: 121.562, placeName: "象山捷運站"),
+            Location(latitude: 25.038, longitude: 121.563, placeName: "市政府")
+        ]
+        
+        activities = [
+            GroupActivity(
+                title: "星巴克買一送一",
+                activityDescription: "限時優惠！大杯拿鐵買一送一，找人一起分享",
+                expiresAt: Date().addingTimeInterval(3600),
+                location: locations[0],
+                creatorId: "user1",
+                creatorName: "吳盛偉",
+                type: .coffeeDeal
+            ),
+            GroupActivity(
+                title: "鼎泰豐午餐團",
+                activityDescription: "人多划算！五人以上九折優惠，現在還有兩個名額",
+                expiresAt: Date().addingTimeInterval(7200),
+                location: locations[1],
+                creatorId: "user2",
+                creatorName: "林小美",
+                type: .foodDeal
+            ),
+            GroupActivity(
+                title: "共乘去陽明山",
+                activityDescription: "週末要去陽明山踏青，有3個空位，願意平攤油錢",
+                expiresAt: Date().addingTimeInterval(86400),
+                location: locations[2],
+                creatorId: "user3",
+                creatorName: "張大方",
+                type: .rideShare
+            ),
+            GroupActivity(
+                title: "好市多購物分享",
+                activityDescription: "週日去好市多採購，可以幫忙帶東西，有需要的跟我說",
+                expiresAt: Date().addingTimeInterval(43200),
+                location: locations[3],
+                creatorId: "user4",
+                creatorName: "陳明德",
+                type: .shopping
+            )
+        ]
+    }
+}
+
+// Group Preview View for the drawer
+struct GroupPreviewView: View {
+    let activity: GroupActivity
+    let onJoin: () -> Void
+    @Environment(\.colorScheme) private var colorScheme
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            // Header section with image, title and type
+            VStack(spacing: 16) {
+                // Activity image placeholder with icon overlay
+                ZStack(alignment: .bottomTrailing) {
+                    // Activity image (placeholder gradient for now)
+                    RoundedRectangle(cornerRadius: AppStyles.cornerRadius)
+                        .fill(
+                            LinearGradient(
+                                colors: [
+                                    typeColor.opacity(0.7),
+                                    typeColor.opacity(0.3)
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .frame(height: 160)
+                        .overlay(
+                            Image(systemName: iconName)
+                                .font(.system(size: 60))
+                                .foregroundColor(.white.opacity(0.6))
+                        )
+                    
+                    // Type indicator
+                    GroupTypeIcon(type: activity.type)
+                        .frame(width: 40, height: 40)
+                        .padding(12)
+                }
+                
+                // Title and expiry
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(activity.title)
+                        .font(AppStyles.Typography.title)
+                        .fontWeight(.bold)
+                    
+                    if let expiresAt = activity.expiresAt {
+                        HStack {
+                            Image(systemName: "clock.fill")
+                                .foregroundColor(AppStyles.primary)
+                            
+                            Text("有效期限至: \(expiresAt, format: Date.FormatStyle(date: .numeric, time: .shortened))")
+                                .font(AppStyles.Typography.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+            }
+            
+            // Description
+            VStack(alignment: .leading, spacing: 12) {
+                Text("活動說明")
+                    .font(AppStyles.Typography.subtitle)
+                    .fontWeight(.medium)
+                
+                Text(activity.activityDescription)
+                    .font(AppStyles.Typography.body)
+                    .padding(.horizontal, 4)
+            }
+            
+            // Location
+            VStack(alignment: .leading, spacing: 8) {
+                Text("活動地點")
+                    .font(AppStyles.Typography.subtitle)
+                    .fontWeight(.medium)
+                
+                HStack {
+                    Image(systemName: "mappin.and.ellipse")
+                        .foregroundColor(.red)
+                        .font(.headline)
+                    
+                    Text(activity.location.placeName ?? "Unknown Location")
+                        .font(AppStyles.Typography.body)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        // Open in Maps app with the coordinates
+                        let url = URL(string: "maps://?ll=\(activity.location.coordinate.latitude),\(activity.location.coordinate.longitude)")
+                        if let url = url, UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url)
+                        }
+                    }) {
+                        Label("導航", systemImage: "arrow.triangle.turn.up.right.circle.fill")
+                            .font(.caption)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 6)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(12)
+                    }
+                }
+            }
+            
+            // Creator & Participants
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("發起人")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    
+                    HStack {
+                        Circle()
+                            .fill(AppStyles.primary.opacity(0.2))
+                            .frame(width: 24, height: 24)
+                            .overlay(
+                                Text(String(activity.creatorName.first ?? "?"))
+                                    .font(.caption)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(AppStyles.primary)
+                            )
+                        
+                        Text(activity.creatorName)
+                            .font(.subheadline)
+                    }
+                }
+                
+                Divider()
+                    .frame(height: 36)
+                
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("參與人數")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    
+                    HStack {
+                        let count = activity.participantIds.count + 1 // +1 for creator
+                        Text("\(count) 人參與")
+                            .font(.subheadline)
+                        
+                        if count > 1 {
+                            HStack(spacing: -8) {
+                                ForEach(0..<min(3, count-1), id: \.self) { index in
+                                    Circle()
+                                        .fill(AppStyles.background)
+                                        .frame(width: 24, height: 24)
+                                        .overlay(
+                                            Circle()
+                                                .stroke(AppStyles.background, lineWidth: 2)
+                                        )
+                                }
+                                
+                                if count > 4 {
+                                    Circle()
+                                        .fill(Color(.systemGray5))
+                                        .frame(width: 24, height: 24)
+                                        .overlay(
+                                            Text("+\(count-3)")
+                                                .font(.caption2)
+                                                .foregroundColor(.secondary)
+                                        )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 12)
+            .background(Color(.systemGray6).opacity(0.5))
+            .cornerRadius(AppStyles.cornerRadius)
+            
+            // Join button
+            Button(action: onJoin) {
+                HStack {
+                    Image(systemName: "person.badge.plus")
+                    Text("加入揪團")
+                }
+                .font(AppStyles.Typography.button)
+                .foregroundColor(.white)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(AppStyles.primaryGradient)
+                .cornerRadius(AppStyles.cornerRadius)
+                .shadow(
+                    color: AppStyles.primary.opacity(0.3),
+                    radius: 5,
+                    x: 0,
+                    y: 2
+                )
+            }
+            .padding(.top, 8)
+        }
+    }
+    
+    private var iconName: String {
+        switch activity.type {
+        case .coffeeDeal:
+            return "cup.and.saucer.fill"
+        case .foodDeal:
+            return "fork.knife"
+        case .rideShare:
+            return "car.fill"
+        case .shopping:
+            return "bag.fill"
+        case .other:
+            return "star.fill"
+        }
+    }
+    
+    private var typeColor: Color {
+        switch activity.type {
+        case .coffeeDeal:
+            return Color.brown
+        case .foodDeal:
+            return Color.orange
+        case .rideShare:
+            return Color.blue
+        case .shopping:
+            return Color.green
+        case .other:
+            return Color.purple
+        }
+    }
+}
+
+struct NearbyActivitiesListView: View {
+    let activities: [GroupActivity]
+    let onActivitySelected: (GroupActivity) -> Void
+    @State private var searchText = ""
+    @State private var selectedCategory: GroupType?
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            // Search bar
+            SearchBar(text: $searchText)
+                .padding(.horizontal)
+            
+            // Category filter
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    CategoryFilterButton(
+                        title: "全部",
+                        iconName: "square.grid.2x2.fill",
+                        color: .purple,
+                        isSelected: selectedCategory == nil
+                    ) {
+                        withAnimation {
+                            selectedCategory = nil
+                        }
+                    }
+                    
+                    CategoryFilterButton(
+                        title: "咖啡",
+                        iconName: "cup.and.saucer.fill",
+                        color: .brown,
+                        isSelected: selectedCategory == .coffeeDeal
+                    ) {
+                        withAnimation {
+                            selectedCategory = .coffeeDeal
+                        }
+                    }
+                    
+                    CategoryFilterButton(
+                        title: "美食",
+                        iconName: "fork.knife",
+                        color: .orange,
+                        isSelected: selectedCategory == .foodDeal
+                    ) {
+                        withAnimation {
+                            selectedCategory = .foodDeal
+                        }
+                    }
+                    
+                    CategoryFilterButton(
+                        title: "共乘",
+                        iconName: "car.fill",
+                        color: .blue,
+                        isSelected: selectedCategory == .rideShare
+                    ) {
+                        withAnimation {
+                            selectedCategory = .rideShare
+                        }
+                    }
+                    
+                    CategoryFilterButton(
+                        title: "購物",
+                        iconName: "bag.fill",
+                        color: .green,
+                        isSelected: selectedCategory == .shopping
+                    ) {
+                        withAnimation {
+                            selectedCategory = .shopping
+                        }
+                    }
+                }
+                .padding(.horizontal)
+            }
+            .padding(.bottom, 8)
+            
+            // Activity count header
+            HStack {
+                Text("\(filteredActivities.count) 個揪團在附近")
+                    .font(AppStyles.Typography.subtitle)
+                    .foregroundColor(.primary)
+                
+                Spacer()
+                
+                // Sort button (could be implemented later)
+                Button(action: {}) {
+                    Label("排序", systemImage: "arrow.up.arrow.down")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                .buttonStyle(.bordered)
+                .buttonBorderShape(.capsule)
+                .controlSize(.small)
+            }
+            .padding(.horizontal)
+            
+            if filteredActivities.isEmpty {
+                // Empty state
+                VStack(spacing: 16) {
+                    Spacer()
+                    
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 40))
+                        .foregroundColor(.secondary.opacity(0.5))
+                    
+                    Text(selectedCategory != nil ? "找不到此類型的揪團" : "附近沒有揪團")
+                        .font(AppStyles.Typography.body)
+                        .foregroundColor(.secondary)
+                    
+                    Spacer()
+                }
+                .frame(height: 200)
+            } else {
+                // Activity list
+                ScrollView {
+                    LazyVStack(spacing: 12) {
+                        ForEach(filteredActivities) { activity in
+                            ActivityCard(
+                                activity: activity,
+                                distance: calculateDistance(to: activity.location.coordinate),
+                                style: .normal
+                            ) {
+                                onActivitySelected(activity)
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 16)
+                }
+            }
+        }
+    }
+    
+    private var filteredActivities: [GroupActivity] {
+        var result = activities
+        
+        // Filter by search text
+        if !searchText.isEmpty {
+            result = result.filter { activity in
+                activity.title.localizedCaseInsensitiveContains(searchText) ||
+                activity.activityDescription.localizedCaseInsensitiveContains(searchText) ||
+                (activity.location.placeName?.localizedCaseInsensitiveContains(searchText) ?? false)
+            }
+        }
+        
+        // Filter by category
+        if let selectedCategory {
+            result = result.filter { $0.type == selectedCategory }
+        }
+        
+        return result
+    }
+    
+    // In a real app, this would calculate actual distance
+    private func calculateDistance(to coordinate: CLLocationCoordinate2D) -> Double {
+        let distances = [150.0, 200.0, 350.0, 500.0, 750.0, 1200.0]
+        return distances.randomElement() ?? 200.0
+    }
+}
+
+struct CategoryFilterButton: View {
+    let title: String
+    let iconName: String
+    let color: Color
+    let isSelected: Bool
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 6) {
+                Image(systemName: iconName)
+                    .font(.system(size: 12))
+                
+                Text(title)
+                    .font(.caption)
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background(
+                Capsule()
+                    .fill(isSelected ? color.opacity(0.2) : Color(.systemGray6))
+            )
+            .foregroundColor(isSelected ? color : .secondary)
+            .overlay(
+                Capsule()
+                    .stroke(isSelected ? color : Color.clear, lineWidth: 1)
+            )
+        }
+    }
+}
+
+            return Color.purple
+        }
+    }
+    
+    private var iconGradient: LinearGradient {
+        LinearGradient(
+            colors: [iconColor, iconColor.opacity(0.7)],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+    
+    private func formatDistance(_ distance: Double) -> String {
+        if distance < 1000 {
+            return "\(Int(distance))m"
+        } else {
+            let km = distance / 1000
+            return String(format: "%.1f km", km)
+        }
+    }
+}
+
+struct TimeRemainingLabel: View {
+    let expiresAt: Date
+    @State private var timeRemaining: String = ""
+    let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
+    
+    var body: some View {
+        HStack(spacing: 3) {
+            Image(systemName: "clock.fill")
+                .font(.caption2)
+            
+            Text(timeRemaining)
+                .font(.caption)
+        }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 2)
+        .background(AppStyles.accent.opacity(0.15))
+        .cornerRadius(10)
+        .foregroundColor(AppStyles.accent)
+        .onAppear {
+            updateTimeRemaining()
+        }
+        .onReceive(timer) { _ in
+            updateTimeRemaining()
+        }
+    }
+    
+    private func updateTimeRemaining() {
+        let remaining = expiresAt.timeIntervalSince(Date())
+        
+        if remaining <= 0 {
+            timeRemaining = "已結束"
+            return
+        }
+        
+        let hours = Int(remaining) / 3600
+        let minutes = (Int(remaining) % 3600) / 60
+        
+        if hours > 0 {
+            timeRemaining = "\(hours)h \(minutes)m"
+        } else {
+            timeRemaining = "\(minutes)m"
+        }
+    }
+}
+
+struct ChatRoomView: View {
+    let activity: GroupActivity
+    @Binding var isPresented: Bool
+    @State private var messageText = ""
+    @State private var messages: [Juka.ChatMessage] = []
+    
+    var body: some View {
+        ZStack {
+            Color(.systemBackground).ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                ChatRoomHeader(
+                    activity: activity,
+                    participantCount: activity.participantIds.count + 1,
+                    onClose: {
+                        withAnimation {
+                            isPresented = false
+                        }
+                    }
+                )
+                
+                if messages.isEmpty {
+                    VStack(spacing: 20) {
+                        Spacer()
+                        
+                        Image(systemName: "bubble.left.and.bubble.right")
+                            .font(.system(size: 50))
+                            .foregroundColor(.secondary.opacity(0.5))
+                        
+                        Text("開始與其他參與者交流吧！")
+                            .font(AppStyles.Typography.body)
+                            .foregroundColor(.secondary)
+                        
+                        ExpirableMessageLabel(isUserMessage: false)
+                        
+                        Spacer()
+                    }
+                } else {
+                    ScrollView {
+                        ForEach(messages) { message in
+                            ChatMessageView(
+                                message: message,
+                                isCurrentUser: message.senderId == "currentUser"
+                            )
+                        }
+                        
+                        ExpirableMessageLabel(isUserMessage: true)
+                            .padding(.bottom, 8)
+                    }
+                }
+                
+                ChatInputView(messageText: $messageText) {
+                    sendMessage()
+                }
+            }
+        }
+        .onAppear {
+            // Add sample message after a delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                let welcomeMessage = Juka.ChatMessage(
+                    groupId: activity.id,
+                    senderId: activity.creatorId,
+                    senderName: activity.creatorName,
+                    content: "歡迎加入！我在\(activity.location.placeName ?? "這裡")等你，大概什麼時候到呢？"
+                )
+                messages.append(welcomeMessage)
+            }
+        }
+    }
+    
+    private func sendMessage() {
+        guard !messageText.isEmpty else { return }
+        
+        let newMessage = Juka.ChatMessage(
+            groupId: activity.id,
+            senderId: "currentUser",
+            senderName: "我",
+            content: messageText
+        )
+        
+        withAnimation {
+            messages.append(newMessage)
+            messageText = ""
+        }
+        
+        // Simulate reply after a delay
+        if messages.count == 1 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                let replyMessage = Juka.ChatMessage(
+                    groupId: activity.id,
+                    senderId: activity.creatorId,
+                    senderName: activity.creatorName,
+                    content: "好的，我等你，我穿黑色T恤，戴眼鏡。"
+                )
+                
+                withAnimation {
+                    messages.append(replyMessage)
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    MapView()
+} 
